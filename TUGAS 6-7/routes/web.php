@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Backend\DashboardController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,48 +17,25 @@ use App\Http\Controllers\Backend\DashboardController;
 */
 
 Route::get('/', function () {
-    return view('welcome') ;
+    return view('welcome');
 });
 
-Route::get('/hello', function () {
-    return 'Hello World' ;
-});
-
-Route::get('/belajar', function () {
-    echo '<h1>Hello World</h1>';
-    echo '<p>Sedang Belajar Laravel</p>';
-});
-
-Route::get('/page/{nomor}', function ($nomor) {
-    return 'Ini halaman ke-' . $nomor ;
-});
-
-Route::get('/image', function () {
-    return view('gambar') ;
-    
-});
-
-Route::get('userNabil', 'App\Http\Controllers\ManagementUserController@index') ;
-
-
-Route::resource('user','App\Http\Controllers\ManagementUserController');  
-
-Route::get('/home', function(){
-    return view('home');
-});
-
-Route::group(['namespace' => 'frontend' ], function () {
-Route::get('home', [HomeController::class, 'index']);   
-
+ Route::group(['namespace' => 'Frontend'], function () {
+    Route::get('home',[HomeController::class, 'index']);
 });
 
 Route::group(['namespace' => 'Backend'], function () {
-Route::get('dashboard', [DashboardController::class, 'index']);
-});
+Route::get('dashboard',[DashboardController::class, 'index']);
+ });
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::middleware(['web' , 'auth'])->group(function () {
-    Route::resource('dashboard', DashboardController::class);
+Route::group(['middleware' => ['web','auth']], function () {
+    Route::group(['namespace' => 'Backend'], function()
+    {
+        Route::resource('dashboard', DashboardController::class);
+        Route::resource('pendidikan', PendidikanController::class);
+    });
 });

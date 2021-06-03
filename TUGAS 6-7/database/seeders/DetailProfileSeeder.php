@@ -14,12 +14,13 @@ class DetailProfileSeeder extends Seeder
      */
     public function run()
     {
-        // insert data ke table pegawai
+        //insert data ke table pegawai
+
         DB::table('detail_profile')->insert([
             'address' => 'Lumajang',
-            'nomor_tlp' => '085748277792',
-            'ttl' => '2003-03-23',
-            'foto' => 'picture.png'
+            'nomor_tlp' => '087811359972',
+            'ttl' => '2001-08-11',
+            'foto' => 'picture.png',
         ]);
     }
 }

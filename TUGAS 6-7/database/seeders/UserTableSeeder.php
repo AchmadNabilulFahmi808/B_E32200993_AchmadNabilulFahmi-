@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
-
 class UserTableSeeder extends Seeder
 {
     /**
@@ -16,8 +15,8 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         User::insert([
-            'name' => 'fahmi',
-            'email' => 'fahmi@gmail.com',
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt(12345678),
         ]);
     }
